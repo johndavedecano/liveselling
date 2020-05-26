@@ -2,9 +2,9 @@
 
 A live selling platform for everyone
 
-![My Image](https://raw.github.com/johndavedecano/livetindahan/master/screenshot1.png)
-![My Image](https://raw.github.com/johndavedecano/livetindahan/master/screenshot2.png)
-![My Image](https://raw.github.com/johndavedecano/livetindahan/master/screenshot3.png)
+![My Image](https://raw.github.com/johndavedecano/liveselling/master/screenshot1.png)
+![My Image](https://raw.github.com/johndavedecano/liveselling/master/screenshot2.png)
+![My Image](https://raw.github.com/johndavedecano/liveselling/master/screenshot3.png)
 
 ## Requires
 
