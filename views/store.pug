@@ -20,7 +20,7 @@ block content
             |     playsinline: true,
             |     url: '#{playbackUrl}',
             |     autoplay: #{user.profile.isLive ? true : false},
-            |     poster: '/#{user.profile.picture}',
+            |     poster: '/#{user.profile.picture ? user.profile.store : 'noimg.jpg'}',
             |     fluid: true
             | });
       .card.mb-4
@@ -35,7 +35,11 @@ block content
               .col-md-4
                 .card
                   div(class="thumbnail-wrapper")
-                    div(class="thumbnail-wrapper__img", style="background-image:url(/" + val.photos[0] || 'noimg.jpg' + ")")
+                    if val.photos[0]
+                      div(class="thumbnail-wrapper__img", style="background-image:url(/" + val.photos[0] + ")")
+                    else
+                      div(class="thumbnail-wrapper__img", style="background-image:url(/noimg.jpg)")
+                    endif
                   .card-body
                     h5(class="card-title")
                       = val.name
@@ -60,20 +64,26 @@ block content
     .col-md-3
       div(class='card mb-4')
         div(class="thumbnail-wrapper")
-          div(class="thumbnail-wrapper__img", style="background-image:url(/" + user.profile.picture || 'noimg.jpg' + ")")
+          if user.profile.picture
+            div(class="thumbnail-wrapper__img", style="background-image:url(/" + user.profile.picture + ")")
+          else
+            div(class="thumbnail-wrapper__img", style="background-image:url(/noimg.jpg)")
       div(class="card")
         div(class="card-body")
           p(class="mb-0")
+            i(class="fa fa-map-marker-alt mr-2")
             strong Location: 
             =  user.profile.location
           hr
           p(class="mb-0")
-              strong Email: 
-              =  user.email
+            i(class="fa fa-envelope mr-2")
+            strong Email: 
+            =  user.email
           hr
           p(class="mb-0")
-              strong Mobile Number: 
-              =  user.profile.mobileNumber
+            i(class="fa fa-mobile-alt mr-2")
+            strong Mobile Number: 
+            =  user.profile.mobileNumber
           hr
           p(class="mb-0")
             a(href=user.profile.facebook class="mr-2")

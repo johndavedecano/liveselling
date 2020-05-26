@@ -10,7 +10,11 @@ block content
       .col-md-4
         .card
           div(class="thumbnail-wrapper")
-            div(class="thumbnail-wrapper__img", style="background-image:url(/" + val.profile.picture || 'noimg.jpg' + ")")
+            if val.profile.picture
+              div(class="thumbnail-wrapper__img", style="background-image:url(/" + val.profile.picture + ")")
+            else
+              div(class="thumbnail-wrapper__img", style="background-image:url(/noimg.jpg)")
+            endif
           .card-body
             h5(class="card-title")
               = val.profile.storeName
