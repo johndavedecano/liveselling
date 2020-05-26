@@ -1,0 +1,13 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:3.6
+    volumes:
+      - ./data:/data
+    ports:
+      - 27017:27017
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui

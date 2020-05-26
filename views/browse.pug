@@ -1,0 +1,31 @@
+extends ./layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom.d-flex
+    h3 Browse
+    div.flex-grow-1
+
+  .row
+    each val in users.docs
+      .col-md-4
+        .card
+          div(class="thumbnail-wrapper")
+            div(class="thumbnail-wrapper__img", style="background-image:url(/" + val.profile.picture || 'noimg.jpg' + ")")
+          .card-body
+            h5(class="card-title")
+              = val.profile.storeName
+            a(href='/stores/' + val._id class="btn btn-primary btn-block") View Tindahan
+  .row
+    .col-md-12.pt-4
+      ul.pagination
+        if page > 1
+          li.page-item
+              a.page-link(href=`?page=${page - 1}`) Previous
+        - var i = 1;
+        while i <= pagesCount
+          li.page-item
+              a.page-link(href=`?page=${i}`)= i++
+        if page < pagesCount
+          li.page-item
+              a.page-link(href=`?page=${parseInt(page) + 1}`) Next
+

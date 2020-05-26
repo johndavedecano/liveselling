@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Add Product
+  form(action='/products/'+product._id+'/update', method='POST' enctype='multipart/form-data')
+    input(type='hidden', name='_csrf', value=_csrf)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Name
+      .col-md-7
+        input.form-control(type='text', required="1", name='name', id='name',  value=product.name, autocomplete)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name')
+      .col-md-7
+        textarea.form-control(name='description', required="1", id='description',  value=product.description, autocomplete)
+          = product.description
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='price') Price
+      .col-md-7
+        input.form-control(type='number', required="1", name='price', id='price',  value=product.price, autocomplete)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='myFile') Select Image
+      .col-md-7
+        input(type='file', name='myFile', accept='image/jpg,image/jpeg,image/png')
+
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Submit

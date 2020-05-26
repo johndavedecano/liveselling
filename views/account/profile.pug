@@ -1,0 +1,153 @@
+extends ../layout
+
+block content
+
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Profile Information
+
+  form(action='/account/profile', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
+      .col-md-7
+        input.form-control(type='email', name='email', id='email', value=user.email, autocomplete='email', required)
+      .offset-sm-3.col-md-7.pl-3
+        if user.emailVerified
+          .text-success.font-italic
+            | Verified
+        else
+          .text-danger.font-italic
+            | Unverified: &nbsp;
+            a(href='/account/verify') Send verification email
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Name
+      .col-md-7
+        input.form-control(type='text', name='name', id='name', value=user.profile.name, autocomplete='name')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right Gender
+      .col-sm-6
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' checked=user.profile.gender == 'male', name='gender', value='male', data-toggle='radio')
+          label.form-check-label Male
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' checked=user.profile.gender == 'female', name='gender', value='female', data-toggle='radio')
+          label.form-check-label Female
+
+        .form-check.form-check-inline
+          input(type='radio', class='form-check-input' checked=user.profile.gender == 'other', name='gender', value='other', data-toggle='radio')
+          label.form-check-label Other
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='storeName') Store Name
+      .col-md-7
+        input.form-control(type='text', name='storeName', id='storeName', value=user.profile.storeName, autocomplete)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='storeDescription') Store Description
+      .col-md-7
+        textarea.form-control(rows='5', name='storeDescription', id='storeDescription', value=user.profile.storeDescription, autocomplete)
+          = user.profile.storeDescription
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='storeLon') Longitude
+      .col-md-7
+        input.form-control(type='text', name='storeLon', id='storeLon', value=user.profile.storeLon, autocomplete)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='storeLat') Latitude
+      .col-md-7
+        input.form-control(type='text', name='storeLat', id='storeLat', value=user.profile.storeLat, autocomplete)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='location') Location
+      .col-md-7
+        input.form-control(type='text', name='location', id='location', value=user.profile.location, autocomplete)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='mobileNumber') Mobile Number
+      .col-md-7
+        input.form-control(type='text', name='mobileNumber', id='mobileNumber', value=user.profile.mobileNumber, autocomplete='url')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='website') Website
+      .col-md-7
+        input.form-control(type='text', name='website', id='website', value=user.profile.website, autocomplete='url')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='website') Facebook
+      .col-md-7
+        input.form-control(type='text', name='facebook', id='facebook', value=user.profile.facebook, autocomplete='url')
+    //- .form-group.row
+    //-   label.col-md-3.col-form-label.font-weight-bold.text-right Gravatar
+    //-   .col-sm-4
+    //-     img(src=user.gravatar(), class='profile', width='100', height='100')
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update Profile
+
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Cover Photo
+  form(role='form', enctype='multipart/form-data', method='POST' action='/account/picture')
+    input(type='hidden', name='_csrf', value=_csrf)
+    img(src=user.profile.picture, class='profile', width='100', height='100')
+    .form-group
+      label.col-form-label.font-weight-bold File Input
+      .col-md-6
+        input(type='file', name='myFile', accept='image/jpg,image/jpeg,image/png')
+    button.btn.btn-primary(type='submit') Submit
+
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Stream Information
+
+  form(action='/account/stream', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='streamKey') Stream Key
+      .col-md-7
+        input.form-control(type='text', name='streamKey', id='streamKey', readonly="1",  value=user.profile.streamKey + '?secret=' + user.profile.streamSecret, autocomplete)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='playbackUrl') Stream URL
+      .col-md-7
+        input.form-control(type='text', name='playbackUrl', id='playbackUrl', readonly="1" value=STREAM_SERVER_URL, autocomplete)
+
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Refresh Keys
+
+
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Change Password
+
+  form(action='/account/password', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='password') New Password
+      .col-md-7
+        input.form-control(type='password', name='password', id='password', autocomplete='new-password', minlength='8', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='confirmPassword') Confirm Password
+      .col-md-7
+        input.form-control(type='password', name='confirmPassword', id='confirmPassword', autocomplete='new-password', minlength='8', required)
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn-primary(type='submit')
+          i.fas.fa-lock.fa-sm
+          | Change Password
+
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Delete Account
+
+  form(action='/account/delete', method='POST', onsubmit="return confirm('Are you sure you want to delete your account?');")
+    .form-group
+      p.offset-sm-3.col-md-7.pl-2 You can delete your account, but keep in mind this action is irreversible.
+      input(type='hidden', name='_csrf', value=_csrf)
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn-danger(type='submit')
+          i.fas.fa-trash-alt.fa-sm
+          | Delete my account
+
+  
