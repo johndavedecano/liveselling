@@ -277,3 +277,45 @@ $enable-gradients: true;
     }
   }
 }
+
+.search-wrapper {
+  border-radius: 5px;
+  background-color: white;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+
+  .has-search .form-control {
+    padding-left: 2.375rem;
+  }
+
+  .category {
+    padding-right: 0;
+    input {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .search {
+    padding-right: 0;
+    padding-left: 0;
+    input {
+      border-left: none;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  .has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+  }
+}

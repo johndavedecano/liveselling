@@ -3,7 +3,15 @@ extends ./layout
 block content
   .row
     .col-md-12
-
+      div(class="search-wrapper")
+        form
+          .row
+            .col-md-3.category
+              select.form-control.form-control-lg(type='text' placeholder='Category')
+            .col-md-7.search
+              input.form-control.form-control-lg(type='text' placeholder='Search live stores')
+            .col-md-2
+              button.btn-primary.btn-block.btn-lg Search
   .row
     each val in users.docs
       .col-md-3.mb-2
@@ -24,6 +32,7 @@ block content
               a(href='/stores/' + val._id, class="d-flex")
                 = val.profile.storeName
             span(class="text-muted small")
+              i(class="fa fa-map-marker-alt mr-2")
               if (val.profile.location)
                 = val.profile.location
               else
