@@ -9,8 +9,9 @@ module.exports = (app) => {
   const contactController = require('./contact')
   const rtmpController = require('./rtmp')
   const productController = require('./product')
-  const browseController = require('./browse')
+  const storesController = require('./stores')
   const storeController = require('./store')
+  const catalogController = require('./catalog')
 
   /**
    * API keys and Passport configuration.
@@ -136,7 +137,9 @@ module.exports = (app) => {
     productController.deletePost,
   )
 
-  app.get('/browse', browseController)
+  app.get('/stores', storesController)
 
   app.get('/stores/:id', storeController)
+
+  app.get('/catalog', catalogController)
 }

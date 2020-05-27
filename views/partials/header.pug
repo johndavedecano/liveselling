@@ -2,7 +2,7 @@
   .container
     a.navbar-brand(href='/')
       i.fas.fa-cube
-      | Live Tindahan PH
+      | LiveTindahanPH
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='.navbar-collapse')
       span.sr-only Toggle navigation
       span.navbar-toggler-icon
@@ -10,8 +10,10 @@
       ul.nav.navbar-nav
         li.nav-item(class=(title === 'Home') ? 'active' : undefined)
           a.nav-link(href='/') Home
-        li.nav-item(class=(title === 'Browse') ? 'active' : undefined)
-          a.nav-link(href='/browse') Browse
+        li.nav-item(class=(title === 'Products') ? 'active' : undefined)
+          a.nav-link(href='/catalog') Products
+        li.nav-item(class=(title === 'Stores') ? 'active' : undefined)
+          a.nav-link(href='/stores') Stores
         li.nav-item(class=(title === 'Contact') ? 'active' : undefined)
           a.nav-link(href='/contact') Contact
         //- li.nav-item(class=(title === 'Status') ? 'active' : undefined)

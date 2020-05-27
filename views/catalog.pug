@@ -1,0 +1,54 @@
+extends ./layout
+
+block content
+  .row
+    .col-md-12
+      div(class="search-wrapper")
+        form
+          .row
+            .col-md-3.category
+              select.form-control.form-control-lg(type='text' placeholder='Category')
+            .col-md-7.search
+              input.form-control.form-control-lg(type='text' placeholder='Search items...')
+            .col-md-2
+              button.btn-primary.btn-block.btn-lg Search
+  .row
+    each val in users.docs
+      .col-md-3.mb-2
+        .card.store-card
+          if val.profile.picture
+            div(class="store-card__header", style="background-image:url(/" + val.profile.picture + ")")
+          else
+            div(class="store-card__header", style="background-image:url(/noimg.jpg)")
+          endif
+          .card-body
+            div(class="avatar-wrapper")
+              if val.profile.picture
+                div(class="avatar-wrapper__img", style="background-image:url(/" + val.profile.picture + ")")
+              else
+                div(class="avatar-wrapper__img", style="background-image:url(/noimg.jpg)")
+              endif
+            h5(class="card-title mb-2")
+              a(href='/stores/' + val._id, class="d-flex")
+                = val.profile.storeName
+            span(class="text-muted small")
+              i(class="fa fa-map-marker-alt mr-2")
+              if (val.profile.location)
+                = val.profile.location
+              else
+                = 'Philippines'
+              endif
+  .row
+    .col-md-12.pt-4
+      ul.pagination
+        if page > 1
+          li.page-item
+              a.page-link(href=`?page=${page - 1}`) Previous
+        - var i = 1;
+        while i <= pagesCount
+          li.page-item
+              a.page-link(href=`?page=${i}`)= i++
+        if page < pagesCount
+          li.page-item
+              a.page-link(href=`?page=${parseInt(page) + 1}`) Next
+

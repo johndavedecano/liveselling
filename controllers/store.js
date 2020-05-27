@@ -5,7 +5,7 @@ module.exports = (req, res) => {
   User.findOne({ _id: req.params.id }, (err, user) => {
     if (err) {
       req.flash('error', { msg: 'Does not exists' })
-      res.redirect('/browse')
+      res.redirect('/stores')
       return
     }
 

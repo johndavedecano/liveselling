@@ -1,10 +1,13 @@
 extends ./layout
 
 block content
-  .pb-2.mt-2.mb-4.border-bottom.d-flex
+  .pb-2.mt-2.mb-4.d-flex
     h3
       = title
     div.flex-grow-1
+    button.btn.btn-light
+      i(class="fas fa-envelope")
+      | Contact Owner
   .row
     .col-md-9
       .card.mb-4
@@ -62,7 +65,14 @@ block content
                   li.page-item
                       a.page-link(href=`?page=${parseInt(page) + 1}`) Next
     .col-md-3
+      if user.profile.isLive
+        div(class="store-status online") Live
+      else
+        div(class="store-status offline") Offline
+      endif
       div(class='card mb-4')
+
+
         div(class="thumbnail-wrapper")
           if user.profile.picture
             div(class="thumbnail-wrapper__img", style="background-image:url(/" + user.profile.picture + ")")
@@ -73,7 +83,7 @@ block content
           p(class="mb-0")
             i(class="fa fa-map-marker-alt mr-2")
             strong Location: 
-            =  user.profile.location
+            =  user.profile.location || 'Philippines'
           hr
           p(class="mb-0")
             i(class="fa fa-envelope mr-2")
@@ -83,12 +93,19 @@ block content
           p(class="mb-0")
             i(class="fa fa-mobile-alt mr-2")
             strong Mobile Number: 
-            =  user.profile.mobileNumber
+            =  user.profile.mobileNumber || 'Not Provided'
           hr
           p(class="mb-0")
             a(href=user.profile.facebook class="mr-2")
               i(class="fab fa-facebook-messenger")
               span Facebook
+          hr
+          p(class="mb-0")
             a(href=user.profile.website)
               i(class="fas fa-link")
               span Website
+          hr
+          p(class="mb-0")
+            a(href="/contact" class="mr-2")
+              i(class="fas fa-exclamation-triangle")
+              span Report to admin

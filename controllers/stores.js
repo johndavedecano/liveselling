@@ -9,8 +9,8 @@ module.exports = (req, res) => {
     },
   ).then(function (result) {
     console.log(result)
-    res.render('browse', {
-      title: 'Home',
+    res.render('stores', {
+      title: 'Stores',
       users: result,
       page: req.query.page,
       pagesCount: Math.ceil(result.total / (req.query.limit || 25)),
