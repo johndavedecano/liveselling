@@ -14,7 +14,7 @@ block content
               button.btn-primary.btn-block.btn-lg Search
   .row
     each val in users.docs
-      .col-md-3.mb-2
+      .col-md-3.mb-4
         .card.store-card
           if val.profile.picture
             div(class="store-card__header", style="background-image:url(/" + val.profile.picture + ")")
