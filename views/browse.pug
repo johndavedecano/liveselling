@@ -1,24 +1,34 @@
 extends ./layout
 
 block content
-  .pb-2.mt-2.mb-4.border-bottom.d-flex
-    h3 Browse
-    div.flex-grow-1
+  .row
+    .col-md-12
 
   .row
     each val in users.docs
-      .col-md-4
-        .card
-          div(class="thumbnail-wrapper")
-            if val.profile.picture
-              div(class="thumbnail-wrapper__img", style="background-image:url(/" + val.profile.picture + ")")
-            else
-              div(class="thumbnail-wrapper__img", style="background-image:url(/noimg.jpg)")
-            endif
+      .col-md-3.mb-2
+        .card.store-card
+          if val.profile.picture
+            div(class="store-card__header", style="background-image:url(/" + val.profile.picture + ")")
+          else
+            div(class="store-card__header", style="background-image:url(/noimg.jpg)")
+          endif
           .card-body
-            h5(class="card-title")
-              = val.profile.storeName
-            a(href='/stores/' + val._id class="btn btn-primary btn-block") View Tindahan
+            div(class="avatar-wrapper")
+              if val.profile.picture
+                div(class="avatar-wrapper__img", style="background-image:url(/" + val.profile.picture + ")")
+              else
+                div(class="avatar-wrapper__img", style="background-image:url(/noimg.jpg)")
+              endif
+            h5(class="card-title mb-2")
+              a(href='/stores/' + val._id, class="d-flex")
+                = val.profile.storeName
+            span(class="text-muted small")
+              if (val.profile.location)
+                = val.profile.location
+              else
+                = 'Philippines'
+              endif
   .row
     .col-md-12.pt-4
       ul.pagination

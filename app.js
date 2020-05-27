@@ -103,6 +103,7 @@ app.disable('x-powered-by')
 app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.STREAM_SERVER_URL = process.env.STREAM_SERVER_URL
+  app.locals.moment = require('moment')
   next()
 })
 
